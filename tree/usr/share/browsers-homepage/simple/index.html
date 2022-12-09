@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Search by Elive O.S</title>
+  <meta name="Elive OS: beautiful, fast, and powerful Linux OS" content="Elive O.S. beautiful, fast, clean and powerful Linux OS">
+  <meta name="www.elivecd.org" content="Elive OS beautiful, fast, and powerful Linux OS">
+
+  <!--We (elive) don't want / need statistics for this, why we should? disable for now...-->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!--<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-xxxxxxxxx-1"></script>-->
+  <!--<script>-->
+  <!--window.dataLayer = window.dataLayer || [];-->
+  <!--function gtag(){dataLayer.push(arguments);}-->
+  <!--gtag('js', new Date());-->
+  <!--gtag('config', 'UA-xxxxxxxxx-1');-->
+  <!--</script>-->
+
+  <!-- style {{{ -->
+  <style type="text/css">
+  html {
+//    font: normal 300 16px/25px "Ubuntu", Arial, "libra sans", sans-serif;
+    color: #333;
+  }
+  body {
+    background: white;
+    margin: 0 auto;
+  }
+  button::-moz-focus-inner {
+    /* fix buttons in FF */
+    border: 0;
+    padding: 0;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Remove button margin in webkit */
+    button{
+        margin: 0;
+    }
+  }
+  .acchide {
+    text-indent: -999em;
+    display: block;
+  }
+  /* one-form */
+  input[type="search"] {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border-radius: 2px;
+  width: 100%;
+  padding: 0.5em 0.6em;
+  margin: 0 0 0.5em 0;
+  display: block;
+  border: 1px solid #ccc;
+  font-weight: inherit;
+  -webkit-transition: 0.3s linear border;
+  -moz-transition: 0.3s linear border;
+  -ms-transition: 0.3s linear border;
+  -o-transition: 0.3s linear border;
+  transition: 0.3s linear border;
+  }
+  input[type="search"]:focus {
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+  border-color: #129FEA;
+  }
+  /* end one-form */
+
+  /* one-list */
+  ul, ol {
+  margin: 0.5em 0;
+  padding: 0;
+  }
+  ul li {
+  list-style: none;
+  }
+  .one-list-inline {
+  display: inline;
+  overflow: hidden;
+  margin: 0 0 0 0.3em;
+  padding: 0;
+  }
+  .one-list-inline li {
+  list-style: none;
+  display: inline-block;
+  }
+  .one-list-inline li:after {
+  margin: 0 0.15em;
+  }
+  .one-list-inline li:last-child:after {
+  content: '';
+  }
+  /* end one-list */
+
+  /* one-box */
+  .one-box {
+  padding: 20px;
+  margin: 0 0 2em 0;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px;
+  }
+  .one-box-bordered {
+  border: 1px solid #ccc;
+  }
+  /* end one-box */
+
+  .search-box {
+    margin: 1em;
+    border-color: #eee;
+
+    -webkit-transition: margin 200ms ease, padding 200ms ease;
+    -moz-transition: margin 200ms ease, padding 200ms ease;
+    transition: margin 200ms ease, padding 200ms ease;
+  }
+  .ubuntu-branding {
+    background: url(sprite.png) no-repeat;
+    background-position: 0px -251px;
+    background-color: #aea79f;
+    height: 40px;
+    border-radius: 5px 5px 0 0;
+    margin: -21px;
+    margin-bottom: 20px;
+  }
+  .logo {
+    margin: 0 0 15px 0;
+  }
+  .logo a {
+    font-size: 1px;
+    display: block;
+    text-indent: -9999px;
+    background: url(nothing.png) no-repeat;
+    background-position: -10px -310px;
+    padding: 0;
+    height: 38px;
+    width: 109px;
+    position: relative;
+    -webkit-transition: margin 200ms ease;
+    -moz-transition: margin 200ms ease;
+    transition: margin 200ms ease;
+  }
+  .logo,
+  .search-form {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (min-width: 665px) {
+    .wrapper {
+        max-width: 665px;
+        margin: 0 auto;
+    }
+    .search-box {
+        padding-bottom: 100px;
+        margin-top: 65px;
+    }
+    .logo a {
+        margin-top: 65px;
+    }
+    .search-form {
+        text-align: center;
+    }
+  }
+  .search-form {
+    padding-right: 75px;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .search-input {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: inherit;
+  }
+  .search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #4d90fe;
+    background: -moz-linear-gradient(top, #4d90fe 0%, #4787ed 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#4787ed));
+    background: -webkit-linear-gradient(top, #4d90fe 0%,#4787ed 100%);
+    background: linear-gradient(to bottom, #4d90fe 0%,#4787ed 100%);
+    border: 1px solid #3079ED;
+    border-radius: 2px;
+    color: #FFFFFF;
+    cursor: default;
+    font-weight: bold;
+    height: 37px;
+    line-height: 37px;
+    width: 70px;
+    margin-left: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    -moz-user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  #sspan {
+    background: url(sprite.png) no-repeat;
+    background-position: -10px -692px;
+    display: block;
+    height: 17px;
+    width: 14px;
+    margin: auto;
+    position: relative;
+    top: 8px;
+  }
+  .external-links {
+    margin: 1em;
+  }
+  .external-links li {
+    text-align: left;
+    display: block;
+    margin: 0 1em 1em 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ccc;
+  }
+  .external-links li:after {
+    margin: 0;
+  }
+  .external-links a {
+    display: block;
+    text-decoration: none;
+    color: gray;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 35px;
+  }
+  .external-links a::after {
+    content: " ›";
+  }
+  .external-links a:hover {
+    color: #e24912;
+  }
+  @media screen and (min-width: 665px) {
+    .external-links {
+        width: 595px;
+        margin: auto;
+        display: block;
+        text-align: center;
+    }
+    .external-links li {
+        display: inline-block;
+        margin: 0 1em 0 0;
+        padding: 0;
+        border: none;
+    }
+    .external-links li:last-child {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+    .external-links li a {
+        display: inline-block;
+    }
+  }
+  .help-link a,
+  .shop-link a,
+  .community-link a {
+    background: url(sprite.png) no-repeat;
+  }
+  .help-link a {
+    background-position: -10px -450px;
+  }
+  .help-link:hover a {
+    background-position: -10px -490px;
+  }
+  .shop-link a {
+    background-position: -10px -368px;
+  }
+  .shop-link:hover a {
+    background-position: -10px -410px;
+  }
+  .community-link a {
+    background-position: -10px -528px;
+  }
+  .community-link:hover a {
+    background-position: -10px -568px;
+  }
+  </style>
+<!-- }}} -->
+
+  <meta content="Search by Elive OS - Elive OS beautiful, fast, and powerful Linux distro" name="author">
+  <meta content="Search by Elive OS - Elive OS beautiful, fast, clean and powerful Linux distro" name="description">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="search-box one-box one-box-bordered">
+      <div style="text-align: center;">
+        <img src="logo-elive.png" width=128 height=128 alt="Elive OS" title="Elive OS">
+        <!--<img src="logo-elive.gif" width=128 height=128 alt="Elive OS" title="Elive OS">-->
+        <br>
+        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt=""></a>-->
+        <i><a href="https://www.elivecd.org/donate/" target="_blank">Help us keeping this amazing project alive</a></i>
+      </div>
+      <h1 class="logo"><a href="search.html">Google</a></h1> <!-- logo for google search before the form -->
+      <form method="get" class="search-form" action="https://www.google.com/search" name="search" id="search">
+        <input class="search-input" name="q" id="sbi" type="search"><span style="color: #999999;"><i>by Google Search</i></span>
+        <br>
+        <br>
+
+        <!--extra entries-->
+        <a href="https://mail.google.com/" style="color: #666666;">Gmail</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/imghp" style="color: #666666;">Images</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.youtube.com/" style="color: #666666;">YouTube</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/maps" style="color: #666666;">Maps</a>
+        &nbsp; | &nbsp;
+        <a href="https://translate.google.com/" style="color: #666666;">Translate</a>
+
+        <button id="sbtn" class="search-button" type="submit">
+          <span id="sspan"></span> <!-- search icon -->
+          <span class="acchide">Search</span></button>
+        <input name="ie" value="UTF-8" type="hidden">
+        <input name="sa" value="Search" type="hidden">
+        <input name="channel" value="fe" type="hidden">
+        <!--<input name="client" value="browser-ubuntu" type="hidden">-->
+        <!--<input title="search" name="hl" value="en" type="hidden">-->
+      </form>
+    </div><!-- close search-box -->
+  </div><!-- close wrapper -->
+  <ul class="external-links one-list-inline">
+    <li class="help-link">
+      <a href="https://www.elivecd.org">Website</a>
+    </li>
+    <li class="shop-link">
+      <a href="https://forum.elivelinux.org">Forums</a>
+    </li>
+    <!--TODO: this link is useless, we should change it to something else-->
+    <!--<li class="community-link">-->
+      <!--<a href="https://www.elivecd.org/user-reviews/">Reviews</a>-->
+    <!--</li>-->
+    <li class="community-link">
+      <a href="https://www.elivecd.org/make-elive-more-known-to-the-world/">Spread Elive!</a>
+    </li>
+  </ul>
+  <div style="text-align: center;">
+    <a href="https://paypal.me/pools/c/8bCddhTdXx" target="_blank"><br></a>
+  </div>
+  <div style="text-align: center;">
+    <br>
+  </div>
+  <div style="text-align: center;">
+    <br>
+  </div>
+  <script type="text/javascript">
+  //<![CDATA[
+  (function focus_search() {
+    function search_select(e) {
+        if(e.value.length > 0) {
+            e.select();
+        }
+        e.select();
+    }
+
+    sbi = document.getElementById('sbi');
+    sbi.focus();
+    search_select(sbi);
+  })();
+  //]]>
+  </script><!-- vim: set foldmethod=marker :-->
+</body>
+</html>
