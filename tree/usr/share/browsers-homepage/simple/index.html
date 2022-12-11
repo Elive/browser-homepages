@@ -4,9 +4,7 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Search by Elive O.S</title>
-  <meta name="Elive OS: beautiful, fast, and powerful Linux OS" content="Elive O.S. beautiful, fast, clean and powerful Linux OS">
-  <meta name="www.elivecd.org" content="Elive OS beautiful, fast, and powerful Linux OS">
+  <title>Search by Elive OS</title>
 
   <!--We (elive) don't want / need statistics for this, why we should? disable for now...-->
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -35,7 +33,7 @@
   }
   @media screen and (-webkit-min-device-pixel-ratio:0) {
     /* Remove button margin in webkit */
-    button{
+    button {
         margin: 0;
     }
   }
@@ -325,12 +323,11 @@ body::before {
   }
 }
 
-
+.bottom-text {
+  text-align: center;
+}
   </style>
 <!-- }}} -->
-
-  <meta content="Search by Elive OS - Elive OS beautiful, fast, and powerful Linux distro" name="author">
-  <meta content="Search by Elive OS - Elive OS beautiful, fast, clean and powerful Linux distro" name="description">
 </head>
 <body>
   <div class="wrapper">
@@ -339,25 +336,14 @@ body::before {
         <img src="logo-elive.png" width=128 height=128 alt="Elive OS" title="Elive OS">
         <!--<img src="logo-elive.gif" width=128 height=128 alt="Elive OS" title="Elive OS">-->
         <br>
-        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt=""></a>-->
-        <a href="https://www.elivecd.org/donate/" target="_blank" style="color:#53b8d2;">Help us keeping this amazing project alive</a>
+        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt="Elive's PayPal"></a>-->
+        <a id="donate" href="https://www.elivecd.org/donate/" target="_blank" style="color:#53b8d2;">Help us keep this amazing project alive</a>
       </div>
       <h1 class="logo"><a href="search.html">Google</a></h1> <!-- logo for google search before the form -->
       <form method="get" class="search-form" action="https://www.google.com/search" name="search" id="search">
-        <input class="search-input" name="q" id="sbi" type="search" style="background-color:transparent; color:cyan;"><span style="color: #555555;">by Google Search</span>
+        <input class="search-input" name="q" id="sbi" type="search" style="background-color: transparent; color: cyan;" /><span style="color: #555555;">by Google Search</span>
         <br>
         <br>
-
-        <!--extra entries-->
-        <a href="https://mail.google.com/" style="color: #53b8d2;">Gmail</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/imghp" style="color: #53b8d2;">Images</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.youtube.com/" style="color: #53b8d2;">YouTube</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/maps" style="color: #53b8d2;">Maps</a>
-        &nbsp; | &nbsp;
-        <a href="https://translate.google.com/" style="color: #53b8d2;">Translate</a>
 
         <button id="sbtn" class="search-button" type="submit">
           <span id="sspan"></span> <!-- search icon -->
@@ -368,8 +354,22 @@ body::before {
         <!--<input name="client" value="browser-ubuntu" type="hidden">-->
         <!--<input title="search" name="hl" value="en" type="hidden">-->
       </form>
+        
+      <div class="bottom-text">
+        <!--extra entries-->
+        <a href="https://mail.google.com/" style="color: #53b8d2;">Gmail</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/imghp" style="color: #53b8d2;">Images</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.youtube.com/" style="color: #53b8d2;">YouTube</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/maps" style="color: #53b8d2;">Maps</a>
+        &nbsp; | &nbsp;
+        <a href="https://translate.google.com/" style="color: #53b8d2;">Translate</a>
+      </div>
     </div><!-- close search-box -->
   </div><!-- close wrapper -->
+  
   <ul class="external-links one-list-inline">
     <li class="help-link">
       <a href="https://www.elivecd.org">Website</a>
