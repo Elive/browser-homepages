@@ -4,9 +4,7 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Search by Elive O.S</title>
-  <meta name="Elive OS: beautiful, fast, and powerful Linux OS" content="Elive O.S. beautiful, fast, clean and powerful Linux OS">
-  <meta name="www.elivecd.org" content="Elive OS beautiful, fast, and powerful Linux OS">
+  <title>Search by Elive OS</title>
 
   <!--We (elive) don't want / need statistics for this, why we should? disable for now...-->
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -259,34 +257,12 @@
         display: inline-block;
     }
   }
-  .help-link a,
-  .shop-link a,
-  .community-link a {
-    background: url(sprite.png) no-repeat;
-  }
-  .help-link a {
-    background-position: -10px -450px;
-  }
-  .help-link:hover a {
-    background-position: -10px -490px;
-  }
-  .shop-link a {
-    background-position: -10px -368px;
-  }
-  .shop-link:hover a {
-    background-position: -10px -410px;
-  }
-  .community-link a {
-    background-position: -10px -528px;
-  }
-  .community-link:hover a {
-    background-position: -10px -568px;
-  }
+.bottom-text {
+  text-align: center;
+}
+
   </style>
 <!-- }}} -->
-
-  <meta content="Search by Elive OS - Elive OS beautiful, fast, and powerful Linux distro" name="author">
-  <meta content="Search by Elive OS - Elive OS beautiful, fast, clean and powerful Linux distro" name="description">
 </head>
 <body>
   <div class="wrapper">
@@ -295,25 +271,14 @@
         <img src="logo-elive.png" width=128 height=128 alt="Elive OS" title="Elive OS">
         <!--<img src="logo-elive.gif" width=128 height=128 alt="Elive OS" title="Elive OS">-->
         <br>
-        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt=""></a>-->
-        <i><a href="https://www.elivecd.org/donate/" target="_blank">Help us keeping this amazing project alive</a></i>
+        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt="Elive's PayPal"></a>-->
+        <i><a id="donate" href="https://www.elivecd.org/donate/" target="_blank">Help us keep this amazing project alive</a></i>
       </div>
       <h1 class="logo"><a href="search.html">Google</a></h1> <!-- logo for google search before the form -->
       <form method="get" class="search-form" action="https://www.google.com/search" name="search" id="search">
         <input class="search-input" name="q" id="sbi" type="search"><span style="color: #999999;"><i>by Google Search</i></span>
         <br>
         <br>
-
-        <!--extra entries-->
-        <a href="https://mail.google.com/" style="color: #666666;">Gmail</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/imghp" style="color: #666666;">Images</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.youtube.com/" style="color: #666666;">YouTube</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/maps" style="color: #666666;">Maps</a>
-        &nbsp; | &nbsp;
-        <a href="https://translate.google.com/" style="color: #666666;">Translate</a>
 
         <button id="sbtn" class="search-button" type="submit">
           <span id="sspan"></span> <!-- search icon -->
@@ -324,32 +289,34 @@
         <!--<input name="client" value="browser-ubuntu" type="hidden">-->
         <!--<input title="search" name="hl" value="en" type="hidden">-->
       </form>
+        
+      <div class="bottom-text">
+        <!--extra entries-->
+        <a href="https://mail.google.com/" style="color: #53b8d2;">Gmail</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/imghp" style="color: #53b8d2;">Images</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.youtube.com/" style="color: #53b8d2;">YouTube</a>
+        &nbsp; | &nbsp;
+        <a href="https://www.google.com/maps" style="color: #53b8d2;">Maps</a>
+        &nbsp; | &nbsp;
+        <a href="https://translate.google.com/" style="color: #53b8d2;">Translate</a>
+      </div>
     </div><!-- close search-box -->
   </div><!-- close wrapper -->
+  
   <ul class="external-links one-list-inline">
-    <li class="help-link">
+    <li>
       <a href="https://www.elivecd.org">Website</a>
     </li>
-    <li class="shop-link">
+    <li>
       <a href="https://forum.elivelinux.org">Forums</a>
     </li>
-    <!--TODO: this link is useless, we should change it to something else-->
-    <!--<li class="community-link">-->
-      <!--<a href="https://www.elivecd.org/user-reviews/">Reviews</a>-->
-    <!--</li>-->
-    <li class="community-link">
+    <li>
       <a href="https://www.elivecd.org/make-elive-more-known-to-the-world/">Spread Elive!</a>
     </li>
   </ul>
-  <div style="text-align: center;">
-    <a href="https://paypal.me/pools/c/8bCddhTdXx" target="_blank"><br></a>
-  </div>
-  <div style="text-align: center;">
-    <br>
-  </div>
-  <div style="text-align: center;">
-    <br>
-  </div>
+
   <script type="text/javascript">
   //<![CDATA[
   (function focus_search() {
