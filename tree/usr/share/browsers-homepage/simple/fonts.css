@@ -1,0 +1,35 @@
+/* fonts.css */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/cinzel-regular.ttf') format('truetype');
+}
+/* @font-face { */
+/*   font-family: 'Cinzel'; */
+/*   font-style: normal; */
+/*   font-weight: 900; */
+/*   font-display: swap; */
+/*   src: url('fonts/cinzel-900.ttf') format('truetype'); */
+/* } */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/outfit-300.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/outfit-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  src: url('fonts/space-grotesk.ttf') format('truetype');
+}
+
