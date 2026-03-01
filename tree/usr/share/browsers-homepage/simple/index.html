@@ -1,337 +1,1021 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en">
 <head>
-  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Elive Search</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elive Homepage Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* These will be set dynamically by JavaScript */
+            --bg-primary: #e4e7eb;
+            --bg-secondary: #f0f2f5;
+            --fg-primary: #1f2937;
+            --fg-secondary: #4b5563;
+            --fg-muted: #6b7280;
+            --accent: #334155;
+            --accent-light: #475569;
+            --accent-glow: rgba(51, 65, 85, 0.15);
+            --teal: #0d9488;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-blur: 16px;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --glass-inset: inset 0 1px 0 0 rgba(255, 255, 255, 1);
+            --glass-text: #1f2937;
+            --glass-text-muted: rgba(31, 41, 55, 0.8);
+            --glass-highlight: rgba(255, 255, 255, 1);
+            --active-bg: rgba(51, 65, 85, 0.15);
+            --active-border: rgba(51, 65, 85, 0.4);
+            --active-text: #1f2937;
+        }
 
-  <!--We (elive) don't want / need statistics for this, why we should? disable for now...-->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!--<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-xxxxxxxxx-1"></script>-->
-  <!--<script>-->
-  <!--window.dataLayer = window.dataLayer || [];-->
-  <!--function gtag(){dataLayer.push(arguments);}-->
-  <!--gtag('js', new Date());-->
-  <!--gtag('config', 'UA-xxxxxxxxx-1');-->
-  <!--</script>-->
+        * {
+            font-family: 'Space Grotesk', sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <!-- style {{{ -->
-  <style type="text/css">
-  html {
-    font: normal 300 16px/25px "Ubuntu", Arial, "libra sans", sans-serif;
-    color: #333;
-  }
-  body {
-    background: white;
-    margin: 0 auto;
-  }
-  button::-moz-focus-inner {
-    /* fix buttons in FF */
-    border: 0;
-    padding: 0;
-  }
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-    /* Remove button margin in webkit */
-    button{
-        margin: 0;
-    }
-  }
-  .acchide {
-    text-indent: -999em;
-    display: block;
-  }
-  /* one-form */
-  input[type="search"] {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  border-radius: 2px;
-  width: 100%;
-  padding: 0.5em 0.6em;
-  margin: 0 0 0.5em 0;
-  display: block;
-  border: 1px solid #ccc;
-  font-weight: inherit;
-  -webkit-transition: 0.3s linear border;
-  -moz-transition: 0.3s linear border;
-  -ms-transition: 0.3s linear border;
-  -o-transition: 0.3s linear border;
-  transition: 0.3s linear border;
-  }
-  input[type="search"]:focus {
-  outline: 0;
-  outline: thin dotted \9;
-  /* IE6-9 */
-  border-color: #129FEA;
-  }
-  /* end one-form */
+        body {
+            background: var(--bg-primary);
+            color: var(--fg-primary);
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: color 0.5s ease;
+            background-image: radial-gradient(circle at 50% 50%, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
 
-  /* one-list */
-  ul, ol {
-  margin: 0.5em 0;
-  padding: 0;
-  }
-  ul li {
-  list-style: none;
-  }
-  .one-list-inline {
-  display: inline;
-  overflow: hidden;
-  margin: 0 0 0 0.3em;
-  padding: 0;
-  }
-  .one-list-inline li {
-  list-style: none;
-  display: inline-block;
-  }
-  .one-list-inline li:after {
-  margin: 0 0.15em;
-  }
-  .one-list-inline li:last-child:after {
-  content: '';
-  }
-  /* end one-list */
+        .clock-font { font-family: 'Outfit', sans-serif; }
 
-  /* one-box */
-  .one-box {
-  padding: 20px;
-  margin: 0 0 2em 0;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  padding: 20px;
-  }
-  .one-box-bordered {
-  border: 1px solid #ccc;
-  }
-  /* end one-box */
+        /* Floating Background Elements */
+        .floating-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 0;
+            will-change: transform;
+        }
 
-  .search-box {
-    margin: 1em;
-    border-color: #eee;
+        [data-theme="day"] #shape1 { opacity: 0.25; }
+        [data-theme="day"] #shape2 { opacity: 0.20; }
+        [data-theme="day"] #shape3 { opacity: 0.20; }
+        [data-theme="night"] .floating-shape { opacity: 0.15; filter: blur(120px); }
 
-    -webkit-transition: margin 200ms ease, padding 200ms ease;
-    -moz-transition: margin 200ms ease, padding 200ms ease;
-    transition: margin 200ms ease, padding 200ms ease;
-  }
-  .ubuntu-branding {
-    background: url(sprite.png) no-repeat;
-    background-position: 0px -251px;
-    background-color: #aea79f;
-    height: 40px;
-    border-radius: 5px 5px 0 0;
-    margin: -21px;
-    margin-bottom: 20px;
-  }
-  .logo {
-    margin: 0 0 15px 0;
-  }
-  .logo a {
-    font-size: 1px;
-    display: block;
-    text-indent: -9999px;
-    background: url(nothing.png) no-repeat;
-    background-position: -10px -310px;
-    padding: 0;
-    height: 38px;
-    width: 109px;
-    position: relative;
-    -webkit-transition: margin 200ms ease;
-    -moz-transition: margin 200ms ease;
-    transition: margin 200ms ease;
-  }
-  .logo,
-  .search-form {
-    max-width: 460px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @media screen and (min-width: 665px) {
-    .wrapper {
-        max-width: 665px;
-        margin: 0 auto;
-    }
-    .search-box {
-        padding-bottom: 100px;
-        margin-top: 65px;
-    }
-    .logo a {
-        margin-top: 65px;
-    }
-    .search-form {
-        text-align: center;
-    }
-  }
-  .search-form {
-    padding-right: 75px;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  .search-input {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: inherit;
-  }
-  .search-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #4d90fe;
-    background: -moz-linear-gradient(top, #4d90fe 0%, #4787ed 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#4787ed));
-    background: -webkit-linear-gradient(top, #4d90fe 0%,#4787ed 100%);
-    background: linear-gradient(to bottom, #4d90fe 0%,#4787ed 100%);
-    border: 1px solid #3079ED;
-    border-radius: 2px;
-    color: #FFFFFF;
-    cursor: default;
-    font-weight: bold;
-    height: 37px;
-    line-height: 37px;
-    width: 70px;
-    margin-left: 0.5em;
-    text-align: center;
-    text-decoration: none;
-    -moz-user-select: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  #sspan {
-    background: url(sprite.png) no-repeat;
-    background-position: -10px -692px;
-    display: block;
-    height: 17px;
-    width: 14px;
-    margin: auto;
-    position: relative;
-    top: 8px;
-  }
-  .external-links {
-    margin: 1em;
-  }
-  .external-links li {
-    text-align: left;
-    display: block;
-    margin: 0 1em 1em 1em;
-    padding-bottom: 1em;
-    border-bottom: 1px solid #ccc;
-  }
-  .external-links li:after {
-    margin: 0;
-  }
-  .external-links a {
-    display: block;
-    text-decoration: none;
-    color: gray;
-    height: 30px;
-    line-height: 30px;
-    padding-left: 35px;
-  }
-  .external-links a::after {
-    content: " ›";
-  }
-  .external-links a:hover {
-    color: #e24912;
-  }
-  @media screen and (min-width: 665px) {
-    .external-links {
-        width: 595px;
-        margin: auto;
-        display: block;
-        text-align: center;
-    }
-    .external-links li {
-        display: inline-block;
-        margin: 0 1em 0 0;
-        padding: 0;
-        border: none;
-    }
-    .external-links li:last-child {
-        margin-right: 0;
-        margin-bottom: 0;
-    }
-    .external-links li a {
-        display: inline-block;
-    }
-  }
-.bottom-text {
-  text-align: center;
-}
+        /* --- GLASS COMPONENTS --- */
 
-  </style>
-<!-- }}} -->
+        .glass-element {
+            background: var(--glass-bg);
+            /* Fallback for browsers that don't support backdrop-filter */
+            @supports not (backdrop-filter: blur(1px)) {
+                background: var(--bg-secondary);
+            }
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inset);
+            color: var(--glass-text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-element:hover {
+            transform: translateY(-1px);
+            border-color: var(--glass-highlight);
+        }
+
+        .glass-element:active {
+            transform: none;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .glass-element:active::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+        }
+
+        [data-theme="night"] .glass-element:active::after {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- MAIN LAYOUT --- */
+
+        #topContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-bottom: 180px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .center-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Search Input */
+        .search-input {
+            position: relative;
+            z-index: 120;
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            padding-right: 6.5rem;
+            font-size: 1.125rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            color: var(--glass-text);
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: var(--glass-shadow), var(--glass-inset);
+        }
+
+        .search-input:focus {
+            border-color: transparent;
+            box-shadow:
+                var(--glass-shadow),
+                0 0 25px var(--accent-glow),
+                0 0 50px rgba(245, 166, 35, 0.05);
+        }
+
+        .search-input::placeholder { color: var(--glass-text-muted); }
+
+        .search-icons {
+            position: absolute;
+            right: 1.25rem;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 130;
+        }
+
+        /* Engine Buttons */
+        .engine-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.85rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-inset);
+            color: var(--glass-text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .engine-btn:hover { color: var(--glass-text); }
+
+        .engine-btn.active {
+            background: var(--active-bg);
+            border: 1px solid var(--active-border);
+            color: var(--active-text);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .engine-btn:active::after {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,0.15);
+        }
+        [data-theme="night"] .engine-btn:active::after { background: rgba(255,255,255,0.15); }
+
+        /* Quick Links Container (Fixed Bottom) */
+        #linksWrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            padding-bottom: 1.5rem;
+            background: linear-gradient(to top, var(--bg-primary) 10%, transparent);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quick-link {
+            display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+            padding: 0.6rem; border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow), var(--glass-inset);
+            cursor: pointer; text-decoration: none; color: var(--glass-text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .quick-link:hover { transform: translateY(-3px); border-color: var(--glass-highlight); }
+        .quick-link:hover .link-icon { transform: scale(1.1); color: var(--accent); }
+
+        /* Footer Message (Single Line) */
+        #footerMessage {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 60;
+            font-size: 0.90rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            opacity: 1;
+            transition: opacity 2s ease;
+            text-decoration: none;
+            color: var(--glass-text-muted);
+            /* Flexbox for dot alignment */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            /* Force single line */
+            white-space: nowrap;
+        }
+        #footerMessage.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Blinking Dot with Neon Glow */
+        .blink-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0.4;
+                /* Dim glow */
+                box-shadow:
+                    0 0 2px #22c55e,
+                    0 0 2px #22c55e;
+            }
+            100% {
+                opacity: 1;
+                /* Bright glow */
+                box-shadow:
+                    0 0 2px #22c55e,
+                    0 0 5px #22c55e,
+                    0 0 15px #22c55e,
+                    0 0 25px rgba(34, 197, 94, 0.6);
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex; gap: 0.25rem; padding: 0.25rem;
+            background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur));
+            border: var(--glass-border); border-radius: 0.75rem; box-shadow: var(--glass-shadow);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; font-weight: 600;
+            background: transparent; border: none; color: var(--glass-text-muted);
+            cursor: pointer; transition: all 0.2s ease; position: relative; overflow: hidden;
+        }
+
+        [data-theme="day"] .theme-btn { color: #1f2937; }
+        [data-theme="night"] .theme-btn { color: rgba(255,255,255,0.7); }
+
+        .theme-btn.active { background: var(--active-bg); color: var(--active-text); box-shadow: none; }
+
+        /* Icon Buttons */
+        .icon-btn {
+            padding: 0.5rem; background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05); color: var(--glass-text-muted);
+            cursor: pointer; transition: all 0.2s ease; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        [data-theme="day"] .icon-btn { background: rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.05); color: #4b5563; }
+        .icon-btn:hover { color: var(--accent); background: rgba(255, 255, 255, 0.2); }
+        [data-theme="day"] .icon-btn:hover { background: rgba(0, 0, 0, 0.1); }
+        .voice-btn.listening { color: var(--teal); border-color: var(--teal); box-shadow: 0 0 15px rgba(13, 148, 136, 0.3); }
+
+        /* Sync Button */
+        .sync-btn-container { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 100; transition: opacity 0.3s ease, transform 0.3s ease; }
+        .sync-btn {
+            font-size: 0.75rem; padding: 0.5rem 1rem; border-radius: 0.5rem;
+            background: var(--glass-bg); backdrop-filter: blur(12px);
+            border: var(--glass-border); box-shadow: var(--glass-shadow); color: var(--glass-text);
+            text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
+        }
+        .sync-btn:hover { background: var(--accent); color: #fff; border-color: transparent; }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+        .fade-out { animation: fadeOut 0.6s ease forwards; }
+
+        .quote-text-dynamic { transition: font-size 0.5s ease; }
+        .quote-small { font-size: 1rem; line-height: 1.4; }
+        .quote-medium { font-size: 1.25rem; line-height: 1.4; }
+        .quote-large { font-size: 1.5rem; line-height: 1.3; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            #linksWrapper { display: none !important; }
+            #footerMessage { display: none !important; }
+        }
+
+        @media (max-width: 768px) {
+            .quick-links-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 0.5rem !important; }
+            .quick-link { padding: 0.5rem !important; }
+            .quick-link svg { width: 20px; height: 20px; }
+            .search-input { font-size: 1rem; padding: 1rem 1.25rem; }
+            .theme-toggle-container { transform: scale(0.8); opacity: 0; pointer-events: none; }
+            .elive-logo { width: 80px; height: 80px; }
+
+            .center-wrapper { top: 30%; width: 90%; }
+
+            #voiceLangSelect { 
+                padding: 0.4rem 2rem 0.4rem 0.75rem; 
+                font-size: 0.75rem; 
+                height: auto; 
+                max-width: 100%;
+            }
+            #voiceModal .glass-element { padding: 1.25rem; max-width: 280px; width: 85%; }
+        }
+
+        @media (max-height: 700px) {
+            .center-wrapper { top: 30%; }
+            #logoWrapper img { width: 48px; height: 48px; }
+            #infoWrapper { margin-bottom: 1rem; }
+            #linksWrapper { padding-top: 0.5rem; }
+        }
+
+        @media (max-width: 480px) { .quick-links-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
+
+        button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .elive-logo { width: 100px; height: 100px; border-radius: 1.25rem; transition: transform 0.3s ease; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15)); }
+        .elive-logo:hover { transform: rotate(-5deg) scale(1.05); }
+
+        .hotkey-indicator { font-size: 0.625rem; padding: 2px 6px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; color: var(--fg-secondary); font-family: 'Space Grotesk', monospace; border: 1px solid var(--glass-border); }
+        .hotkey-container { transition: opacity 1s ease; margin-top: 1rem; } 
+        .hotkey-container.hide { opacity: 0; pointer-events: none; }
+
+        /* Custom Select Styling */
+        #voiceLangSelect {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            color: var(--glass-text);
+            background-color: var(--glass-bg);
+        }
+
+        #voiceLangSelect option {
+            background-color: var(--bg-secondary);
+            color: var(--fg-primary);
+            padding: 10px;
+        }
+
+        [data-theme="night"] #voiceLangSelect option {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Voice Wave Animation */
+        .voice-wave span {
+            width: 4px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 4px;
+            animation: wave 1s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--teal);
+        }
+        .voice-wave span:nth-child(1) { animation-delay: 0.0s; }
+        .voice-wave span:nth-child(2) { animation-delay: 0.1s; }
+        .voice-wave span:nth-child(3) { animation-delay: 0.2s; }
+        .voice-wave span:nth-child(4) { animation-delay: 0.3s; }
+        .voice-wave span:nth-child(5) { animation-delay: 0.4s; }
+        .voice-wave span:nth-child(6) { animation-delay: 0.5s; }
+        .voice-wave span:nth-child(7) { animation-delay: 0.6s; }
+
+        @keyframes wave {
+            0%, 100% { height: 15px; opacity: 0.5; }
+            50% { height: 45px; opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="search-box one-box one-box-bordered">
-      <div style="text-align: center;">
-        <img src="logo-elive.png" width=128 height=128 alt="Elive OS" title="Elive OS">
-        <!--<img src="logo-elive.gif" width=128 height=128 alt="Elive OS" title="Elive OS">-->
-        <br>
-        <!--<a href="https://www.elivecd.org/donate/" target="_blank"><img src="PayPal.png" alt="Elive's PayPal"></a>-->
-        <i><a id="donate" href="https://www.elivecd.org/donate/" target="_blank">Help us keep this amazing project alive</a></i>
-      </div>
-      <h1 class="logo"><a href="search.html">Google</a></h1> <!-- logo for google search before the form -->
-      <form method="get" class="search-form" action="https://www.google.com/search" name="search" id="search">
-        <input class="search-input" name="q" id="sbi" type="search"><span style="color: #999999;"><i>by Google Search</i></span> - <a href="https://accounts.google.com/signin/chrome/sync/identifier?ssp=1" style="color: #999999;">Sync your Google</a>
-        <br>
-        <br>
+    <div class="floating-shape" id="shape1" style="width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px;"></div>
+    <div class="floating-shape" id="shape2" style="width: 300px; height: 300px; background: var(--teal); bottom: -50px; right: -50px; animation-delay: -5s;"></div>
+    <div class="floating-shape" id="shape3" style="width: 200px; height: 200px; background: var(--accent-light); top: 50%; left: 50%; animation-delay: -10s;"></div>
 
-        <button id="sbtn" class="search-button" type="submit">
-          <span id="sspan"></span> <!-- search icon -->
-          <span class="acchide">Search</span></button>
-        <input name="ie" value="UTF-8" type="hidden">
-        <input name="sa" value="Search" type="hidden">
-        <input name="channel" value="fe" type="hidden">
-        <!--<input name="client" value="browser-ubuntu" type="hidden">-->
-        <!--<input title="search" name="hl" value="en" type="hidden">-->
-      </form>
-        
-      <div class="bottom-text">
-        <!--extra entries-->
-        <a href="https://mail.google.com/" style="color: #53b8d2;">Gmail</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/imghp" style="color: #53b8d2;">Images</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.youtube.com/" style="color: #53b8d2;">YouTube</a>
-        &nbsp; | &nbsp;
-        <a href="https://www.google.com/maps" style="color: #53b8d2;">Maps</a>
-        &nbsp; | &nbsp;
-        <a href="https://translate.google.com/" style="color: #53b8d2;">Translate</a>
-      </div>
-    </div><!-- close search-box -->
-  </div><!-- close wrapper -->
-  
-  <ul class="external-links one-list-inline">
-    <li>
-      <a href="https://www.elivecd.org">Website</a>
-    </li>
-    <li>
-      <a href="https://forum.elivelinux.org">Forums</a>
-    </li>
-    <li>
-      <a href="https://www.elivecd.org/make-elive-more-known-to-the-world/">Spread Elive!</a>
-    </li>
-  </ul>
+    <!-- Main Content Wrapper -->
+    <div id="topContent">
+        <div class="center-wrapper">
+            <!-- Logo -->
+            <div id="logoWrapper" class="mb-6 fade-in" style="animation-delay: 0.1s;">
+                <img src="logo-elive.png" alt="Elive Linux" class="elive-logo" onerror="this.style.display='none'">
+            </div>
 
-  <script type="text/javascript">
-  //<![CDATA[
-  (function focus_search() {
-    function search_select(e) {
-        if(e.value.length > 0) {
-            e.select();
+            <!-- Info -->
+            <div id="infoWrapper" class="mb-6 fade-in" style="animation-delay: 0.15s; text-align: center; max-width: 600px;">
+                <div id="quoteDisplay">
+                    <p id="quoteText" class="quote-text-dynamic quote-large font-medium mb-2" style="color: var(--fg-primary);"></p>
+                    <p id="quoteAuthor" class="text-sm font-light" style="color: var(--fg-muted);"></p>
+                </div>
+                <div id="clockDisplay" class="text-center hidden">
+                    <p id="clockTime" class="text-7xl md:text-8xl font-bold clock-font tracking-tighter" style="color: var(--fg-primary); line-height: 1;"></p>
+                    <p id="clockDate" class="text-lg font-light mt-2 tracking-wide" style="color: var(--fg-secondary);"></p>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div id="searchWrapper" class="w-full px-4 fade-in relative z-[100]" style="animation-delay: 0.2s; max-width: 680px;">
+                <form id="searchForm" class="search-container relative z-[110] mb-4">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search the web..." autocomplete="off" aria-label="Search input">
+                    <div class="search-icons">
+                        <button type="button" id="voiceBtn" class="icon-btn voice-btn" aria-label="Voice search" title="Voice Search (Ctrl+I)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                <line x1="12" y1="19" x2="12" y2="22"></line>
+                            </svg>
+                        </button>
+                        <button type="submit" class="icon-btn" aria-label="Search">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Hotkey hint -->
+                <div class="text-center mb-6 flex items-center justify-center gap-2 flex-wrap hotkey-container flex-shrink-0" id="hotkeyHint">
+                    <span class="hotkey-indicator">Ctrl + K search</span>
+                    <span class="hotkey-indicator">Ctrl + I voice</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button class="engine-btn active" data-engine="google">Google</button>
+                    <button class="engine-btn" data-engine="duck">Duck</button>
+                    <button class="engine-btn" data-engine="ecosia">Ecosia</button>
+                    <button class="engine-btn" data-engine="youtube">YouTube</button>
+                    <button class="engine-btn" data-engine="claude">Claude</button>
+                    <button class="engine-btn" data-engine="forum">Forum</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links Wrapper (Fixed Bottom) -->
+    <div id="linksWrapper">
+        <div class="quick-links-grid grid grid-cols-5 md:grid-cols-8 gap-3 md:gap-4 w-full max-w-4xl fade-in" style="animation-delay: 0.3s;" id="quickLinks"></div>
+
+        <div class="flex flex-wrap justify-center gap-4 text-sm mt-2">
+            <a href="https://www.elivecd.org/forum/" class="quick-link px-4 py-2" style="padding: 0.5rem 1rem;">
+                <span style="color: var(--glass-text);">Elive Forum</span>
+            </a>
+            <a href="https://www.elivecd.org/" class="quick-link px-4 py-2" style="padding: 0.5rem 1rem;">
+                <span style="color: var(--glass-text);">Elive Website</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer Message (Single Line + Fast Blinking Neon Dot) -->
+    <a href="https://www.elivecd.org/patreon" id="footerMessage" class="glass-element" aria-label="Support Elive">
+        <span class="blink-dot"></span>
+        Help us keeping this amazing project alive
+    </a>
+
+    <!-- Voice Modal -->
+    <div id="voiceModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/20 backdrop-blur-md transition-all duration-500">
+        <div class="glass-element p-8 rounded-3xl text-center max-w-xs w-full mx-4 border-teal/30">
+            <div class="voice-wave flex justify-center gap-1.5 h-16 mb-6 items-center">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p class="text-lg font-semibold mb-2" style="color: var(--glass-text);">Listening...</p>
+            <p id="voiceStatus" class="text-sm mb-6" style="color: var(--glass-text-muted);">Speak your search query</p>
+            
+            <select id="voiceLangSelect" class="w-full p-3 mb-6 rounded-xl border border-white/10 text-sm outline-none focus:border-teal/50 focus:bg-white/10 transition-all cursor-pointer" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%20fill%3D%22none%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em;">
+                <option value="en-US">English (US)</option>
+                <option value="en-GB">English (UK)</option>
+                <option value="es-ES">Español (España)</option>
+                <option value="es-MX">Español (México)</option>
+                <option value="fr-FR">Français</option>
+                <option value="de-DE">Deutsch</option>
+                <option value="it-IT">Italiano</option>
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="pt-PT">Português (Portugal)</option>
+                <option value="ru-RU">Русский</option>
+                <option value="zh-CN">中文 (简体)</option>
+                <option value="zh-TW">中文 (繁體)</option>
+                <option value="ja-JP">日本語</option>
+                <option value="ko-KR">한국어</option>
+                <option value="ar-SA">العربية</option>
+                <option value="hi-IN">हिन्दी</option>
+                <option value="nl-NL">Nederlands</option>
+                <option value="pl-PL">Polski</option>
+                <option value="tr-TR">Türkçe</option>
+                <option value="vi-VN">Tiếng Việt</option>
+                <option value="th-TH">ไทย</option>
+                <option value="id-ID">Bahasa Indonesia</option>
+                <option value="sv-SE">Svenska</option>
+                <option value="no-NO">Norsk</option>
+                <option value="da-DK">Dansk</option>
+                <option value="fi-FI">Suomi</option>
+                <option value="el-GR">Ελληνικά</option>
+                <option value="he-IL">עברית</option>
+                <option value="ro-RO">Română</option>
+                <option value="hu-HU">Magyar</option>
+                <option value="cs-CZ">Čeština</option>
+                <option value="uk-UA">Українська</option>
+            </select>
+
+            <button onclick="toggleVoiceSearch()" class="text-sm font-medium px-6 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors" style="color: var(--glass-text-muted);">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- Sync Button -->
+    <div id="syncContainer" class="sync-btn-container hidden">
+        <a href="https://accounts.google.com/signin/chrome/sync/identifier?ssp=1" class="sync-btn glass-element" id="syncBtn">
+            Sync your browser
+        </a>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container fixed bottom-4 left-4 z-50 fade-in visible" style="animation-delay: 0.5s;" id="themeToggleContainer">
+        <div class="theme-toggle glass-element" role="group" aria-label="Theme selection">
+            <button class="theme-btn" data-theme="day" aria-label="Day theme">Day</button>
+            <button class="theme-btn active" data-theme="auto" aria-label="Auto theme">Auto</button>
+            <button class="theme-btn" data-theme="night" aria-label="Night theme">Night</button>
+        </div>
+    </div>
+
+    <script>
+        // ====== CONFIGURATION ======
+        const demo_mode = false; // Set to false for normal behavior
+
+        // ====== DATA ======
+        const quotes = [
+            { text: "You can only be as good as you dare to be bad.", author: "John Barrymore" },
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+            { text: "The greatest glory in living lies not in never falling, but in rising every time we fall.", author: "Nelson Mandela" },
+            { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" }
+        ];
+
+        const searchEngines = {
+            google: { url: 'https://www.google.com/search?q=', name: 'Google' },
+            duck: { url: 'https://duckduckgo.com/?q=', name: 'Duck' },
+            ecosia: { url: 'https://www.ecosia.org/search?q=', name: 'Ecosia' },
+            youtube: { url: 'https://www.youtube.com/results?search_query=', name: 'YouTube' },
+            claude: { url: 'https://claude.ai/new?q=', name: 'Claude' },
+            forum: { url: 'https://forum.elivelinux.org/search?q=', name: 'Forum' }
+        };
+
+        const quickLinks = [
+            { name: 'Gmail', url: 'https://mail.google.com', icon: 'mail' },
+            { name: 'YouTube', url: 'https://youtube.com', icon: 'play' },
+            { name: 'Maps', url: 'https://maps.google.com', icon: 'map' },
+            { name: 'Translate', url: 'https://translate.google.com', icon: 'language' },
+            { name: 'Drive', url: 'https://drive.google.com', icon: 'folder' },
+            { name: 'News', url: 'https://news.google.com', icon: 'newspaper' },
+            { name: 'Images', url: 'https://images.google.com', icon: 'image' },
+            { name: 'Calendar', url: 'https://calendar.google.com', icon: 'calendar' }
+        ];
+
+        const icons = {
+            mail: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+            play: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+            map: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>',
+            language: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>',
+            folder: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>',
+            newspaper: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6"/></svg>',
+            image: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
+            calendar: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>'
+        };
+
+        // ====== STATE ======
+        let currentEngine = 'google';
+        let currentTheme = 'auto';
+        let currentVoiceLang = 'en-US';
+        let recognition = null;
+        let isListening = false;
+        let demoTime = 0;
+
+        // ====== INIT ======
+        document.addEventListener('DOMContentLoaded', init);
+
+        function init() {
+            loadSettings();
+            initTheme();
+            renderQuickLinks();
+            initSearch();
+            initVoiceSearch();
+            initKeyboardShortcuts();
+            showQuoteSequence();
+            checkChromeSync();
+            startClock();
+            initUITimers();
+            if (demo_mode) startDemoMode();
         }
-        e.select();
-    }
 
-    sbi = document.getElementById('sbi');
-    sbi.focus();
-    search_select(sbi);
-  })();
-  //]]>
-  </script><!-- vim: set foldmethod=marker :-->
+        // ====== DEMO MODE ======
+        function startDemoMode() {
+            setInterval(() => {
+                demoTime += 0.08;
+                if (demoTime >= 24) demoTime = 0;
+                if (currentTheme === 'auto') applyTheme();
+            }, 100);
+        }
+
+        // ====== TIMERS FOR UI ELEMENTS ======
+        function initUITimers() {
+            // Hotkey Hint (10s)
+            setTimeout(() => {
+                const hotkeyHint = document.getElementById('hotkeyHint');
+                if(hotkeyHint) {
+                    hotkeyHint.classList.add('hide');
+                }
+            }, 10000);
+
+            // Theme Toggle (30s)
+            setTimeout(() => {
+                const themeContainer = document.getElementById('themeToggleContainer');
+                if(themeContainer) {
+                    themeContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        themeContainer.style.display = 'none';
+                    }, 1000);
+                }
+            }, 30000);
+
+            // Footer Message (60s)
+            setTimeout(() => {
+                const footerMsg = document.getElementById('footerMessage');
+                if(footerMsg) {
+                    footerMsg.classList.add('hidden');
+                }
+            }, 60000);
+        }
+
+        // ====== SETTINGS ======
+        function loadSettings() {
+            const savedEngine = localStorage.getItem('elive_search_engine');
+            const savedTheme = localStorage.getItem('elive_theme');
+            const savedLang = localStorage.getItem('elive_voice_lang');
+            if (savedEngine && searchEngines[savedEngine]) currentEngine = savedEngine;
+            if (savedTheme) currentTheme = savedTheme;
+            if (savedLang) currentVoiceLang = savedLang;
+        }
+
+        function saveSettings() {
+            localStorage.setItem('elive_search_engine', currentEngine);
+            localStorage.setItem('elive_theme', currentTheme);
+            localStorage.setItem('elive_voice_lang', currentVoiceLang);
+        }
+
+        // ====== THEME ======
+        function initTheme() {
+            updateThemeButtons();
+            applyTheme();
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentTheme = btn.dataset.theme;
+                    updateThemeButtons();
+                    applyTheme();
+                    saveSettings();
+                });
+            });
+            if (!demo_mode) setInterval(() => { if (currentTheme === 'auto') applyTheme(); }, 60000);
+        }
+
+        function updateThemeButtons() {
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.theme === currentTheme));
+        }
+
+        const themeConfigs = {
+            day: {
+                '--bg-primary': [228, 231, 235],
+                '--bg-secondary': [240, 242, 245],
+                '--fg-primary': [31, 41, 55],
+                '--fg-secondary': [75, 85, 99],
+                '--fg-muted': [107, 114, 128],
+                '--accent': [51, 65, 85],
+                '--accent-light': [71, 85, 105],
+                '--accent-glow': [51, 65, 85, 0.15],
+                '--teal': [13, 148, 136],
+                '--glass-bg': [255, 255, 255, 0.75],
+                '--glass-blur': 16,
+                '--glass-border': [255, 255, 255, 0.1],
+                '--glass-inset': [255, 255, 255, 1.0],
+                '--glass-text': [31, 41, 55],
+                '--glass-text-muted': [31, 41, 55, 0.8],
+                '--glass-highlight': [255, 255, 255, 1],
+                '--active-bg': [51, 65, 85, 0.15],
+                '--active-border': [51, 65, 85, 0.4],
+                '--active-text': [31, 41, 55]
+            },
+            night: {
+                '--bg-primary': [15, 20, 25],
+                '--bg-secondary': [26, 32, 40],
+                '--fg-primary': [245, 245, 245],
+                '--fg-secondary': [197, 197, 197],
+                '--fg-muted': [106, 106, 106],
+                '--accent': [245, 166, 35],
+                '--accent-light': [255, 200, 80],
+                '--accent-glow': [245, 166, 35, 0.2],
+                '--teal': [20, 184, 166],
+                '--glass-bg': [20, 20, 25, 0.35],
+                '--glass-blur': 20,
+                '--glass-border': [245, 166, 35, 0.1],
+                '--glass-inset': [255, 255, 255, 0.05],
+                '--glass-text': [255, 255, 255],
+                '--glass-text-muted': [255, 255, 255, 0.75],
+                '--glass-highlight': [245, 166, 35, 0.3],
+                '--active-bg': [245, 166, 35, 0.15],
+                '--active-border': [245, 166, 35, 0.4],
+                '--active-text': [245, 166, 35]
+            }
+        };
+
+        function lerp(start, end, amt) {
+            return start + (end - start) * amt;
+        }
+
+        /**
+         * Applies the theme based on the current time or manual selection.
+         * 
+         * TRANSITION LOGIC:
+         * - The transition occurs over two 2-hour windows:
+         *   - Sunrise: 06:00 to 08:00 (Night fades to Day)
+         *   - Sunset:  18:00 to 20:00 (Day fades to Night)
+         * 
+         * VISUAL EFFECT:
+         * - Instead of a linear fade, we use a Quintic S-Curve (Smootherstep).
+         * - This creates a "fast jump" in the middle of the transition (around 07:00 and 19:00).
+         * - The colors stay stable near the start/end of the windows, then shift rapidly 
+         *   through the "ugly" middle-gray tones to reach the target theme quickly.
+         */
+        function applyTheme() {
+            const root = document.documentElement;
+            let hour = demo_mode ? demoTime : new Date().getHours() + new Date().getMinutes() / 60;
+            let ratio = 0; // 0 is full day, 1 is full night
+
+            if (currentTheme === 'day') ratio = 0;
+            else if (currentTheme === 'night') ratio = 1;
+            else {
+                // Calculate raw linear ratio [0-1] within the 2-hour windows
+                if (hour >= 6 && hour < 8) {
+                    ratio = 1 - ((hour - 6) / 2);
+                } else if (hour >= 8 && hour < 18) {
+                    ratio = 0;
+                } else if (hour >= 18 && hour < 20) {
+                    ratio = (hour - 18) / 2;
+                } else {
+                    ratio = 1;
+                }
+            }
+
+            // Apply a steeper S-curve (Quintic) to make the middle transition much faster.
+            // This ensures the UI doesn't look "washed out" for too long.
+            ratio = Math.pow(ratio, 3) * (ratio * (ratio * 6 - 15) + 10);
+
+            // Apply interpolated colors
+            for (const [prop, dayVal] of Object.entries(themeConfigs.day)) {
+                const nightVal = themeConfigs.night[prop];
+                if (Array.isArray(dayVal)) {
+                    const r = Math.round(lerp(dayVal[0], nightVal[0], ratio));
+                    const g = Math.round(lerp(dayVal[1], nightVal[1], ratio));
+                    const b = Math.round(lerp(dayVal[2], nightVal[2], ratio));
+                    const a = dayVal.length === 4 ? lerp(dayVal[3], nightVal[3], ratio) : null;
+                    
+                    if (a !== null) {
+                        const val = prop === '--glass-inset' ? `inset 0 1px 0 0 rgba(${r}, ${g}, ${b}, ${a})` : `rgba(${r}, ${g}, ${b}, ${a})`;
+                        root.style.setProperty(prop, val);
+                    } else {
+                        root.style.setProperty(prop, `rgb(${r}, ${g}, ${b})`);
+                    }
+                } else {
+                    root.style.setProperty(prop, lerp(dayVal, nightVal, ratio) + (prop.includes('blur') ? 'px' : ''));
+                }
+            }
+            
+            // Set data-theme for legacy CSS selectors if any
+            root.setAttribute('data-theme', ratio > 0.5 ? 'night' : 'day');
+        }
+
+        // ====== QUICK LINKS ======
+        function renderQuickLinks() {
+            const container = document.getElementById('quickLinks');
+            container.innerHTML = quickLinks.map(link => `
+                <a href="${link.url}" class="quick-link glass-element" aria-label="${link.name}">
+                    <span class="link-icon">${icons[link.icon]}</span>
+                    <span class="text-xs font-medium" style="color: var(--glass-text-muted);">${link.name}</span>
+                </a>
+            `).join('');
+        }
+
+        // ====== SEARCH ======
+        function initSearch() {
+            const form = document.getElementById('searchForm');
+            const input = document.getElementById('searchInput');
+            updateEngineButtons();
+            document.querySelectorAll('.engine-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentEngine = btn.dataset.engine;
+                    updateEngineButtons();
+                    saveSettings();
+                    input.focus();
+                });
+            });
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = input.value.trim();
+                if (query) window.location.href = searchEngines[currentEngine].url + encodeURIComponent(query);
+            });
+        }
+
+        function updateEngineButtons() {
+            document.querySelectorAll('.engine-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.engine === currentEngine));
+        }
+
+        // ====== VOICE SEARCH ======
+        function initVoiceSearch() {
+            const voiceBtn = document.getElementById('voiceBtn');
+            const langSelect = document.getElementById('voiceLangSelect');
+            
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) { 
+                voiceBtn.style.display = 'none'; 
+                return; 
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false; 
+            recognition.interimResults = false;
+            
+            // Set initial language from settings or browser default
+            if (!localStorage.getItem('elive_voice_lang')) {
+                currentVoiceLang = navigator.language || 'en-US';
+            }
+            langSelect.value = currentVoiceLang;
+
+            voiceBtn.addEventListener('click', toggleVoiceSearch);
+            
+            langSelect.addEventListener('change', (e) => {
+                currentVoiceLang = e.target.value;
+                saveSettings();
+                if (isListening) {
+                    recognition.stop();
+                    setTimeout(() => recognition.start(), 300);
+                }
+            });
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('searchInput').value = transcript;
+                document.getElementById('voiceStatus').textContent = transcript;
+                setTimeout(() => {
+                    stopListening();
+                    document.getElementById('searchForm').dispatchEvent(new Event('submit'));
+                }, 500);
+            };
+
+            recognition.onerror = (e) => {
+                document.getElementById('voiceStatus').textContent = "Error: " + e.error;
+                setTimeout(stopListening, 1500);
+            };
+            
+            recognition.onend = () => {
+                if (isListening) stopListening();
+            };
+        }
+
+        function toggleVoiceSearch() {
+            if (isListening) { 
+                recognition.stop(); 
+                stopListening(); 
+            } else { 
+                recognition.lang = currentVoiceLang;
+                recognition.start(); 
+                startListening(); 
+            }
+        }
+
+        function startListening() {
+            isListening = true;
+            document.getElementById('voiceModal').classList.remove('hidden');
+            document.getElementById('voiceModal').classList.add('flex');
+            document.getElementById('voiceStatus').textContent = "Speak your search query";
+            const voiceBtn = document.getElementById('voiceBtn');
+            voiceBtn.classList.add('listening');
+        }
+
+        function stopListening() {
+            isListening = false;
+            document.getElementById('voiceModal').classList.add('hidden');
+            document.getElementById('voiceModal').classList.remove('flex');
+            const voiceBtn = document.getElementById('voiceBtn');
+            voiceBtn.classList.remove('listening');
+        }
+
+        // ====== KEYBOARD SHORTCUTS ======
+        function initKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput').focus(); }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'i') { e.preventDefault(); toggleVoiceSearch(); }
+            });
+        }
+
+        // ====== QUOTE SEQUENCE ======
+        function showQuoteSequence() {
+            const quote = quotes[Math.floor(Math.random() * quotes.length)];
+            const quoteTextEl = document.getElementById('quoteText');
+            const quoteAuthorEl = document.getElementById('quoteAuthor');
+            const quoteDisplay = document.getElementById('quoteDisplay');
+            const clockDisplay = document.getElementById('clockDisplay');
+
+            quoteTextEl.textContent = `"${quote.text}"`;
+            quoteAuthorEl.textContent = `-- ${quote.author}`;
+
+            quoteTextEl.classList.remove('quote-small', 'quote-medium', 'quote-large');
+            if (quote.text.length > 80) quoteTextEl.classList.add('quote-small');
+            else if (quote.text.length > 50) quoteTextEl.classList.add('quote-medium');
+            else quoteTextEl.classList.add('quote-large');
+
+            const duration = 1500 + (quote.text.split(' ').length * 500);
+
+            setTimeout(() => {
+                quoteDisplay.classList.add('fade-out');
+                setTimeout(() => {
+                    quoteDisplay.classList.add('hidden');
+                    clockDisplay.classList.remove('hidden');
+                    clockDisplay.classList.add('fade-in');
+                }, 600);
+            }, duration);
+        }
+
+        // ====== CLOCK ======
+        function startClock() { updateClock(); setInterval(updateClock, 1000); }
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clockTime').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+            document.getElementById('clockDate').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+
+        // ====== CHROME SYNC ======
+        function checkChromeSync() {
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            const syncContainer = document.getElementById('syncContainer');
+            const syncDismissed = localStorage.getItem('elive_sync_dismissed');
+            if (isChrome && !syncDismissed) {
+                syncContainer.classList.remove('hidden');
+                document.getElementById('syncBtn').addEventListener('click', () => {
+                    localStorage.setItem('elive_sync_dismissed', 'true');
+                    syncContainer.style.opacity = '0';
+                    syncContainer.style.transform = 'translate(-50%, -10px)';
+                    setTimeout(() => syncContainer.classList.add('hidden'), 300);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
