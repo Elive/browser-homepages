@@ -490,11 +490,10 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-2">
-                    <button class="engine-btn active" data-engine="google">Google</button>
-                    <button class="engine-btn" data-engine="duck">Duck</button>
+                    <button class="engine-btn" data-engine="google">Google</button>
+                    <button class="engine-btn active" data-engine="duck">Duck</button>
                     <button class="engine-btn" data-engine="ecosia">Ecosia</button>
                     <button class="engine-btn" data-engine="youtube">YouTube</button>
-                    <button class="engine-btn" data-engine="claude">Claude</button>
                     <button class="engine-btn" data-engine="forum">Forum</button>
                 </div>
             </div>
@@ -2752,7 +2751,6 @@
             duck: { url: 'https://duckduckgo.com/?q=', name: 'Duck' },
             ecosia: { url: 'https://www.ecosia.org/search?q=', name: 'Ecosia' },
             youtube: { url: 'https://www.youtube.com/results?search_query=', name: 'YouTube' },
-            claude: { url: 'https://claude.ai/new?q=', name: 'Claude' },
             forum: { url: 'https://forum.elivelinux.org/search?q=', name: 'Forum' }
         };
 
@@ -2779,7 +2777,7 @@
         };
 
         // ====== STATE ======
-        let currentEngine = 'google';
+        let currentEngine = 'duck';
         let currentTheme = 'auto';
         let currentVoiceLang = 'en-US';
         let recognition = null;
