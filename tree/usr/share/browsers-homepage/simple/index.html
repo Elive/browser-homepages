@@ -539,11 +539,10 @@
 
         <!-- Engine Selector -->
         <div class="engine-selector animate-in delay-3 mb-3 flex-shrink-0">
-            <button class="engine-btn active" data-engine="google">Google</button>
-            <button class="engine-btn" data-engine="duck">Duck</button>
+            <button class="engine-btn" data-engine="google">Google</button>
+            <button class="engine-btn active" data-engine="duck">Duck</button>
             <button class="engine-btn" data-engine="ecosia">Ecosia</button>
             <button class="engine-btn" data-engine="youtube">YouTube</button>
-            <button class="engine-btn" data-engine="claude">Claude</button>
             <button class="engine-btn" data-engine="forum">Forum</button>
         </div>
 
@@ -2708,9 +2707,9 @@
             { text: "Insecure people put others down to raise themselves up", author: "Habeebe Akande" },
         ];
 
-        const searchEngines = { google: 'https://www.google.com/search?q=', duck: 'https://duckduckgo.com/?q=', ecosia: 'https://www.ecosia.org/search?q=', youtube: 'https://www.youtube.com/results?search_query=', claude: 'https://claude.ai/new?q=', forum: 'https://forum.elivelinux.org/search?q=' };
+        const searchEngines = { google: 'https://www.google.com/search?q=', duck: 'https://duckduckgo.com/?q=', ecosia: 'https://www.ecosia.org/search?q=', youtube: 'https://www.youtube.com/results?search_query=', forum: 'https://forum.elivelinux.org/search?q=' };
 
-        let currentEngine = 'google', themeMode = 'night', isDarkMode = true, recognition = null, particles = [], currentRecognitionLang = navigator.language || 'en-US', isVoiceSearchHotkey = false;
+        let currentEngine = 'duck', themeMode = 'night', isDarkMode = true, recognition = null, particles = [], currentRecognitionLang = navigator.language || 'en-US', isVoiceSearchHotkey = false;
 
         // Timer for quote switching
         let quoteChangeTimeout = null;
@@ -2725,17 +2724,17 @@
             if (s) {
                 try {
                     const o = JSON.parse(s);
-                    currentEngine = o.engine || 'google';
+                    currentEngine = o.engine || 'duck';
                     themeMode = o.themeMode || 'night';
                     if (o.voiceLang) currentRecognitionLang = o.voiceLang;
                     updateEngineUI();
                 } catch (e) {
                     themeMode = 'night';
-                    currentEngine = 'google';
+                    currentEngine = 'duck';
                 }
             } else {
                 themeMode = 'night';
-                currentEngine = 'google';
+                currentEngine = 'duck';
             }
 
             if (themeMode === 'day') isDarkMode = false;
